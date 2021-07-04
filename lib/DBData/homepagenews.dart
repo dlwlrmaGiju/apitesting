@@ -5,8 +5,8 @@ class HomeNews {
   final String id;
   final String images;
   final String caption;
-
-  HomeNews(this.title, this.email, this.dates, this.id, this.images, this.caption);
+final String category;
+  HomeNews(this.title, this.email, this.dates, this.id, this.images, this.caption, this.category);
 
   HomeNews.fromJson(Map<String, dynamic> json)
       : title = json['title'],
@@ -14,7 +14,8 @@ class HomeNews {
         dates = json['dates'],
         id = json['id'],
         images = json['images'],
-        caption = json['captions'];
+        caption = json['captions'],
+       category = json['category'];
 
   Map<String, dynamic> toJson() => {
     'name': title,
@@ -23,5 +24,6 @@ class HomeNews {
     'image' : images,
     'id' : id,
     'caption' : caption,
+    'category' : category
   };
 }

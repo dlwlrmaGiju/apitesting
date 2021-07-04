@@ -138,7 +138,7 @@ class _Clubs extends State<Clubs> {
                   ),
                   Flexible(
                     flex: 1,
-                    child: Text("Clubs", textAlign: TextAlign.center),
+                    child: Text("Clubs", textAlign: TextAlign.center, style: TextStyle(fontSize: 17),),
                   ),
                   Flexible(
                     flex: 1,
@@ -170,8 +170,7 @@ class _Clubs extends State<Clubs> {
                         child: Text(
                           'Today',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -203,15 +202,13 @@ class _Clubs extends State<Clubs> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18
                                     ),
                                   ),
                                   Text(
                                     'Posted today',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -222,7 +219,6 @@ class _Clubs extends State<Clubs> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -261,15 +257,13 @@ class _Clubs extends State<Clubs> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 'Posted today',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -280,7 +274,6 @@ class _Clubs extends State<Clubs> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -309,8 +302,7 @@ class _Clubs extends State<Clubs> {
                         child: Text(
                           'Past Week',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -342,15 +334,13 @@ class _Clubs extends State<Clubs> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -361,7 +351,6 @@ class _Clubs extends State<Clubs> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -400,15 +389,13 @@ class _Clubs extends State<Clubs> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -419,7 +406,6 @@ class _Clubs extends State<Clubs> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -448,8 +434,7 @@ class _Clubs extends State<Clubs> {
                         child: Text(
                           'Past Month',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -481,15 +466,13 @@ class _Clubs extends State<Clubs> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -500,7 +483,6 @@ class _Clubs extends State<Clubs> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -539,15 +521,13 @@ class _Clubs extends State<Clubs> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -558,7 +538,6 @@ class _Clubs extends State<Clubs> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -587,8 +566,7 @@ class _Clubs extends State<Clubs> {
                         child: Text(
                           'More than a month ago',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -620,15 +598,13 @@ class _Clubs extends State<Clubs> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -639,7 +615,6 @@ class _Clubs extends State<Clubs> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -678,15 +653,13 @@ class _Clubs extends State<Clubs> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -697,7 +670,6 @@ class _Clubs extends State<Clubs> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),

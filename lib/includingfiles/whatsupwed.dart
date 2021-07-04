@@ -111,7 +111,7 @@ class _Wuw extends State<Wuw> {
                   ),
                   Flexible(
                     flex: 1,
-                    child: Text("Whats up Wednesday", textAlign: TextAlign.center),
+                    child: Text("Whats up Wednesday", textAlign: TextAlign.center, style: TextStyle(fontSize: 13),),
                   ),
                   Flexible(
                     flex: 1,
@@ -143,7 +143,7 @@ class _Wuw extends State<Wuw> {
                         child: Text(
                           'Most recent',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey,
                           ),
@@ -176,15 +176,13 @@ class _Wuw extends State<Wuw> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -195,7 +193,6 @@ class _Wuw extends State<Wuw> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -217,8 +214,7 @@ class _Wuw extends State<Wuw> {
                         child: Text(
                           'Older Newsletter ',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -250,15 +246,13 @@ class _Wuw extends State<Wuw> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -269,7 +263,6 @@ class _Wuw extends State<Wuw> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -308,15 +301,13 @@ class _Wuw extends State<Wuw> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -327,7 +318,6 @@ class _Wuw extends State<Wuw> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),

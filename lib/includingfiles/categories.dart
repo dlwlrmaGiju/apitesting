@@ -3,6 +3,7 @@ import 'package:apitesting/includingfiles/allNews.dart';
 import 'package:flutter/material.dart';
 import 'NewsLetter.dart';
 import 'eventNews.dart';
+import 'importantNews.dart';
 import 'whatsupwed.dart';
 import 'liveSports.dart';
 
@@ -22,68 +23,53 @@ class _Cate extends State<Cate> {
               physics: BouncingScrollPhysics(),
               slivers: [
                 SliverToBoxAdapter(
-                  child: Container(
-                    width: double.infinity,
-                    height: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                            image: AssetImage('images/one.jpeg'),
-                            fit: BoxFit.cover)),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ImpNews(
+                            title: 'sup',
+                          ),
+                        ),
+                      );
+                    },
                     child: Container(
+                      width: double.infinity,
+                      height: 180,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomRight,
-                          colors: [
-                            Colors.black.withOpacity(.4),
-                            Colors.black.withOpacity(.2),
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                              image: AssetImage('images/important.png'),
+                              fit: BoxFit.cover)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomRight,
+                            colors: [
+                              Colors.black.withOpacity(.4),
+                              Colors.black.withOpacity(.2),
+                            ],
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Center(
+                              child: Text(
+                                "Important",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 70,
+                            ),
                           ],
                         ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            "Events",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            height: 40,
-                            margin: EdgeInsets.symmetric(horizontal: 40),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => EventNews(
-                                      title: 'sup',
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Center(
-                                  child: Text(
-                                "Explore Now",
-                                style: TextStyle(
-                                    color: Colors.grey[900],
-                                    fontWeight: FontWeight.bold),
-                              )),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                        ],
                       ),
                     ),
                   ),
@@ -271,7 +257,7 @@ class _Cate extends State<Cate> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Sports(
+                          builder: (context) => EventNews(
                             title: 'sup',
                           ),
                         ),
@@ -283,7 +269,7 @@ class _Cate extends State<Cate> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
-                              image: AssetImage('images/athletics2.png'),
+                              image: AssetImage('images/one.jpeg'),
                               fit: BoxFit.cover)),
                       child: Container(
                         decoration: BoxDecoration(
@@ -301,7 +287,7 @@ class _Cate extends State<Cate> {
                           children: <Widget>[
                             Center(
                               child: Text(
-                                "Athletics",
+                                "Events",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 30,

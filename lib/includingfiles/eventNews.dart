@@ -143,8 +143,8 @@ class _EventNews extends State<EventNews> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 17,
+                      ),
                     ),
                   ),
                   Flexible(
@@ -177,8 +177,7 @@ class _EventNews extends State<EventNews> {
                         child: Text(
                           'Today',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -210,14 +209,13 @@ class _EventNews extends State<EventNews> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 19,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     'Posted today',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -228,7 +226,6 @@ class _EventNews extends State<EventNews> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -267,14 +264,13 @@ class _EventNews extends State<EventNews> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 19,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 'Posted today',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -285,7 +281,6 @@ class _EventNews extends State<EventNews> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -314,8 +309,7 @@ class _EventNews extends State<EventNews> {
                         child: Text(
                           'Past Week',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -347,14 +341,13 @@ class _EventNews extends State<EventNews> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 19,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -365,7 +358,6 @@ class _EventNews extends State<EventNews> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -404,14 +396,13 @@ class _EventNews extends State<EventNews> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 19,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -422,7 +413,6 @@ class _EventNews extends State<EventNews> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -451,8 +441,7 @@ class _EventNews extends State<EventNews> {
                         child: Text(
                           'Past Month',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -484,14 +473,13 @@ class _EventNews extends State<EventNews> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 19,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -540,14 +528,13 @@ class _EventNews extends State<EventNews> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 19,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -558,7 +545,6 @@ class _EventNews extends State<EventNews> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -587,9 +573,8 @@ class _EventNews extends State<EventNews> {
                         child: Text(
                           'More than a month ago',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 13,
                             color: Colors.grey,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -626,14 +611,13 @@ class _EventNews extends State<EventNews> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 19,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -644,7 +628,6 @@ class _EventNews extends State<EventNews> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -683,14 +666,13 @@ class _EventNews extends State<EventNews> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 19,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -701,7 +683,6 @@ class _EventNews extends State<EventNews> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),

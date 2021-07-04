@@ -111,7 +111,7 @@ class _NewsLetterList extends State<NewsLetterList> {
                   ),
                   Flexible(
                     flex: 1,
-                    child: Text("Newsletter", textAlign: TextAlign.center),
+                    child: Text("Newsletter", textAlign: TextAlign.center, style: TextStyle(fontSize: 17),),
                   ),
                   Flexible(
                     flex: 1,
@@ -143,8 +143,7 @@ class _NewsLetterList extends State<NewsLetterList> {
                         child: Text(
                           'Most recent',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -177,15 +176,13 @@ class _NewsLetterList extends State<NewsLetterList> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -196,7 +193,6 @@ class _NewsLetterList extends State<NewsLetterList> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -218,8 +214,7 @@ class _NewsLetterList extends State<NewsLetterList> {
                         child: Text(
                           'Older Newsletter ',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
                             color: Colors.grey,
                           ),
                         ),
@@ -251,15 +246,13 @@ class _NewsLetterList extends State<NewsLetterList> {
                                   Text(
                                     showing.title,
                                     style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   Text(
                                     showing.dates,
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -270,7 +263,6 @@ class _NewsLetterList extends State<NewsLetterList> {
                                     'Posted by: ' + showing.email,
                                     style: TextStyle(
                                       fontSize: 10,
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -309,15 +301,13 @@ class _NewsLetterList extends State<NewsLetterList> {
                               Text(
                                 showing.title,
                                 style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
                                 ),
                               ),
                               Text(
                                 showing.dates,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
@@ -328,7 +318,6 @@ class _NewsLetterList extends State<NewsLetterList> {
                                 'Posted by: ' + showing.email,
                                 style: TextStyle(
                                   fontSize: 10,
-                                  fontWeight: FontWeight.bold,
                                   color: Colors.grey,
                                 ),
                               ),
