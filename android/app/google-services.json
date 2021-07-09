@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "868768981728",
-    "project_id": "cheongna-dalton-school-569e9",
-    "storage_bucket": "cheongna-dalton-school-569e9.appspot.com"
+    "project_number": "947724182596",
+    "project_id": "cdsapp-68db3",
+    "storage_bucket": "cdsapp-68db3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:868768981728:android:e9b3def7ae6f3919e2a685",
+        "mobilesdk_app_id": "1:947724182596:android:d0fba2dc94cf78b5974811",
         "android_client_info": {
           "package_name": "com.DaltonNetwork.news"
         }
       },
       "oauth_client": [
         {
-          "client_id": "868768981728-p8lu63dm7p08597gk2cerhklkh5uudgh.apps.googleusercontent.com",
+          "client_id": "947724182596-jhin535l7j4jsb0nrg844ohn6o9u1fhf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC7UQUNxjR7pm0l2dNnzBHjjlOWkKmRuns"
+          "current_key": "AIzaSyC72CZ2f859AwBm-TJSdxqVEqx01KVb-54"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "868768981728-p8lu63dm7p08597gk2cerhklkh5uudgh.apps.googleusercontent.com",
+              "client_id": "947724182596-jhin535l7j4jsb0nrg844ohn6o9u1fhf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

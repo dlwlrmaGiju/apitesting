@@ -17,4 +17,5 @@ class News {
     'date' : dates,
     'id' : id,
   };
+
 }

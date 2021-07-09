@@ -1,6 +1,7 @@
 // @dart=2.9
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'dart:io';
-
 import 'package:apitesting/includingfiles/documents/privacy.dart';
 import 'package:apitesting/includingfiles/documents/terms.dart';
 import 'package:apitesting/version.dart';
@@ -8,14 +9,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'DBData/getLogin.dart';
 import 'includingfiles/Dates.dart';
+import 'includingfiles/constant/const.dart';
 import 'includingfiles/constant/constants.dart';
 import 'includingfiles/categories.dart';
 import 'includingfiles/homepage/homepages.dart';
 import 'includingfiles/liveSports.dart';
+import 'includingfiles/login.dart';
 import 'includingfiles/lunch.dart';
 import 'package:mailto/mailto.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
   'high_importance_channel',
@@ -26,7 +33,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 );
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+FlutterLocalNotificationsPlugin();
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -40,17 +47,15 @@ Future<void> main() async {
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+      AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
-    badge: true,//or fix this shit fast
+    badge: true,
     sound: true,
   );
-//bitch get me out O btw my emulator is fucked up I cant get to the notification page wtf???? create new emulator this is like my 10th time every time it pussies out like this
-  runApp(MyApp());// can u like fucking fix it
-  //send me the entire project rn ill test notifications while u work on fixing this doghsit
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -60,8 +65,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+
   void initState() {
     super.initState();
+
+    _fcm.getToken().then((token) {
+      print("The token is: " + token);
+    });
+
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
@@ -86,7 +98,7 @@ class _MyAppState extends State<MyApp> {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("onMEssageOpenedApp event");
+      print("onMessageOpenedApp event");
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
       if (notification != null && android != null) {
@@ -114,6 +126,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
   }
@@ -129,232 +142,303 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final fontColor = Colors.grey[700];
 
-  bool loggedIn = true;
+
+
+
+  @override
+  void initState() {
+    getEmail();
+  }
+
+  getEmail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      UserEmail = prefs.getString('UserMail');
+    });
+  }
+  var autoLogInUrl;
+
+  _logInGood() {
+    http.get(autoLogInUrl).then((response) {
+      if (response.statusCode == 200) {
+        var jsonString = response.body;
+        List news = jsonDecode(jsonString);
+        var nnews = news[0];
+
+        LogginIn info = LogginIn(
+            nnews["accountID"],
+            nnews['graduationYear'],
+            nnews['email'],
+            nnews["first_name"],
+            nnews["last_name"],
+            nnews["school"],
+            nnews["imageLink"]);
+        setState(() {
+          userInfo = new LogginIn(info.id, info.graduationYear, info.email,
+              info.first, info.last, info.school, info.imageLink);
+        });
+        print(userInfo.last);
+      } else {
+        print('ErrorhasOccured');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        key: _scaffoldKey,
-        drawer: Drawer(
-          child: Column(
-            children: [
-              loggedIn ? 
+    urlForHomeNews =
+        Uri.parse('https://cdsnet.kr/flutterConn/homenews.php?id=' + UserEmail);
+    if (UserEmail != "noData" && justBooted) {
+      print(urlForHomeNews);
+      //autologin
+      setState(() {
+        autoLogInUrl = Uri.parse(
+            'https://cdsnet.kr/flutterConn/mobile/autoLogin.php?id=' + UserEmail);
+      });
+      print(autoLogInUrl);
+      _logInGood();
+      went++;
+      loggedIn = true;
+      justBooted = false;
+    }
 
-              //LOGGED IN
-              Container(
-                height: 220,
-                child: UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(
-                    image: new DecorationImage(
-                      image: AssetImage('images/cds.jpg'),
-                      colorFilter: ColorFilter.mode(Color(0xF1f0e03).withOpacity(0.75), BlendMode.srcOver),
-                      fit: BoxFit.cover,
+    if (went <= 0) {
+      if (userInfo.graduationYear != "graduationYear") {
+        setState(() {
+          loggedIn = true;
+        });
+      } else {
+        loggedIn = false;
+      }
+    }
+    print(loggedIn);
+    went = 0;
+    return new WillPopScope(
+      onWillPop: () async => false,
+      child: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          key: _scaffoldKey,
+          drawer: Drawer(
+            child: Column(
+              children: [
+                loggedIn
+                    ?
+                //LOGGED IN
+                Container(
+                  height: 340,
+                  child: UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade700.withOpacity(0.5),
+                          spreadRadius: 8,
+                          blurRadius: 15,
+                          offset: Offset(
+                              0, 0.75), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10)),
+                      image: new DecorationImage(
+                        image: NetworkImage(userInfo.imageLink),
+                        colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.7),
+                            BlendMode.srcOver),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  currentAccountPictureSize: Size.square(90),
-                  currentAccountPicture: CircleAvatar(
-                    radius: 40,
-                    backgroundColor: const Color(0xFF77889),
-                    backgroundImage: NetworkImage( //try before this shit crashes again wait idk if this shit is configured yetMATE how do i fucking lohower this shit i gotta see first
-                        "https://i.pinimg.com/474x/ca/49/50/ca495017eec9dad55892423007d8286e.jpg"),
-                  ),
-                  accountName: Container(
-                    child: Text(
-                      "Victor Shin",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    currentAccountPictureSize: Size.square(130),
+                    currentAccountPicture: Container(
+                      child: CircleAvatar(
+                        radius: 120,
+                        backgroundColor: const Color(0xFF77889),
+                        backgroundImage: NetworkImage(userInfo.imageLink),
+                      ),
                     ),
-                  ),
-                  accountEmail: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                    child: Container(
-                      child: Text(
-                        "wooseokshin2023@daltonschool.kr",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                    accountName: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              userInfo.first + " " + userInfo.last,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 23),
+                            ),
+                            userInfo.graduationYear != "graduationYear"
+                                ? Text(
+                              " " + userInfo.graduationYear,
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 11),
+                            )
+                                : Text(
+                              " Teacher",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 11),
+                            )
+                          ],
+                        )),
+                    accountEmail: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 3, 0, 0),
+                      child: Container(
+                        child: Text(
+                          userInfo.email,
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 14),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ) : 
+                )
+                    :
 
-              //NOT LOGGED IN
-              Container(
-                height: 220,
-                child: DrawerHeader(
-                  decoration: BoxDecoration(
+                //NOT LOGGED IN
+                Container(
+                  height: 220,
+                  child: DrawerHeader(
+                    decoration: BoxDecoration(
                       image: new DecorationImage(
                         image: AssetImage('images/cds.jpg'),
                         fit: BoxFit.cover,
                       ),
-                    ), child: null,
+                    ),
+                    child: null,
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(Icons.mail),
+                        title: Text(
+                          'Contact',
+                          style: TextStyle(
+                            color: fontColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                        onTap: launchMailto,
+                      ),
 
-
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: <Widget>[
-                    //Container(
-                    //  height: 220,
-                    //  child: DrawerHeader(
-                    //    decoration: BoxDecoration(
-                    //      image: new DecorationImage(
-                    //          image: AssetImage('images/cds.jpg'),
-                    //          fit: BoxFit.cover),
-                    //    ),
-                    //  ),
-                    //),
-                    //ListTile(
-                    //  leading: Icon(Icons.info),
-                    //  title: Text(
-                    //    'About',
-                    //    style: TextStyle(
-                    //      color: fontColor,
-                    //      fontSize: 18,
-                    //    ),
-                    //  ),
-                    //  onTap: () {
-                    //    //
-                    //  },
-                    //),
-                    ListTile(
-                      leading: Icon(Icons.mail),
-                      title: Text(
-                        'Contact',
-                        style: TextStyle(
-                          color: fontColor,
-                          fontSize: 18,
+                      ListTile(
+                        leading: Icon(Icons.contact_page),
+                        title: Text(
+                          'Terms & Conditions',
+                          style: TextStyle(
+                            color: fontColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Terms()),
+                          );
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.shield),
+                        title: Text(
+                          'Privacy Policy',
+                          style: TextStyle(
+                            color: fontColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PrivacyPolicy()),
+                          );
+                        },
+                      ),
+                      //LOGIN: CHANGES LOGIN TO LOGOUT WHEN LOGGED IN AND SO ON YOU GET THE IDEA
+                      //CONTROLLED BY BOOLEAN ABOVE CALLED loggedIn
+                      ListTile(
+                        leading:
+                        loggedIn ? Icon(Icons.logout) : Icon(Icons.login),
+                        title: Text(
+                          loggedIn ? 'Log Out' : 'Log In',
+                          style: TextStyle(
+                            color: fontColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                        onTap: () async {
+                          //log out of account function
+                          print("Logged out!");
+                          loggedIn
+                              ? logOutBoolean()
+                              : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Login(),
+                            ),
+                          );
+                          logInBoolean();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Align(
+                        alignment: FractionalOffset.bottomCenter,
+                        child: Text(
+                          "Version " + version,
+                          style: TextStyle(
+                            color: fontColor,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
-                      onTap: launchMailto,
-                    ),
-                    //ListTile(
-                    //  leading: Icon(Icons.notifications),
-                    //  title: Text(
-                    //    'Notifications',
-                    //    style: TextStyle(
-                    //      color: fontColor,
-                    //      fontSize: 18,
-                    //    ),
-                    //  ),
-                    //  onTap: () {},
-                    //),
-                    ListTile(
-                      leading: Icon(Icons.contact_page),
-                      title: Text(
-                        'Terms & Conditions',
-                        style: TextStyle(
-                          color: fontColor,
-                          fontSize: 18,
-                        ),
+                    ))
+              ],
+            ),
+          ),
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(70),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 40, 0, 0),
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          _scaffoldKey.currentState.openDrawer();
+                        },
+                        icon: Icon(Icons.menu)),
+                    Expanded(
+                      child: TabBar(
+                        labelColor: Colors.black,
+                        unselectedLabelColor: kGrey1,
+                        unselectedLabelStyle: kNonActiveTabStyle,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        isScrollable: true,
+                        indicatorColor: Colors.black,
+                        labelStyle: kActiveTabStyle.copyWith(fontSize: 25.0),
+                        tabs: [
+                          Tab(text: "All"),
+                          Tab(text: "Category"),
+                          Tab(text: "Lunch"),
+                          Tab(text: "Dates"),
+                        ],
                       ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Terms()),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.shield),
-                      title: Text(
-                        'Privacy Policy',
-                        style: TextStyle(
-                          color: fontColor,
-                          fontSize: 18,
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PrivacyPolicy()),
-                        );
-                      },
-                    ),
-                    //LOGIN: CHANGES LOGIN TO LOGOUT WHEN LOGGED IN AND SO ON YOU GET THE IDEA
-                    //CONTROLLED BY BOOLEAN ABOVE CALLED loggedIn
-                    ListTile(
-                      leading:
-                          loggedIn ? Icon(Icons.logout) : Icon(Icons.login),
-                      title: Text(
-                        loggedIn ? 'Log Out' : 'Log In',
-                        style: TextStyle(
-                          color: fontColor,
-                          fontSize: 18,
-                        ),
-                      ),
-                      onTap: () async {
-                        //log out of account function
-                        print("Logged out!");
-                        loggedIn ? logOutBoolean() : logInBoolean();
-                      },
                     ),
                   ],
                 ),
-              ),
-              Container(
-                  child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: Text(
-                    "Version " + version,
-                    style: TextStyle(
-                      color: fontColor,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ))
-            ],
+              )),
+          body: TabBarView(
+            children: [AllTabView(), Cate(), Lunch(), Dates()],
           ),
-        ),
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(70),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 40, 0, 0),
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        _scaffoldKey.currentState.openDrawer();
-                      },
-                      icon: Icon(Icons.menu)),
-                  Expanded(
-                    child: TabBar(
-                      labelColor: Colors.black,
-                      unselectedLabelColor: kGrey1,
-                      unselectedLabelStyle: kNonActiveTabStyle,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      isScrollable: true,
-                      indicatorColor: Colors.black,
-                      labelStyle: kActiveTabStyle.copyWith(fontSize: 25.0),
-                      tabs: [
-                        Tab(text: "All"),
-                        Tab(text: "Category"),
-                        Tab(text: "Lunch"),
-                        Tab(text: "Dates"),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            )),
-        body: TabBarView(
-          children: [
-            AllTabView(),
-            Cate(),
-            Lunch(),
-            Dates(),
-          ],
         ),
       ),
     );
   }
-
   launchMailto() async {
     final mailtoLink = Mailto(
       to: ['wooseokshin2023@daltonschool.kr', 'gkim2023@daltonschool.kr'],
@@ -374,15 +458,23 @@ class _MyHomePageState extends State<MyHomePage> {
     return "";
   }
 
-  void logOutBoolean() {
+  Future<void> logOutBoolean() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      userInfo.setGraduationYear("graduationYear");
+      userInfo.setId("id");
+      userInfo.setImageLink("imageLink");
+      userInfo.setEmail("email");
+      userInfo.setSchool("school");
+      userInfo.setFirst("first");
+      userInfo.setLast("last");
       loggedIn = false;
+      went = 0;
+      prefs.setString('UserMail', "noData");
     });
   }
 
   void logInBoolean() {
-    setState(() {
-      loggedIn = true;
-    });
+    loggedIn = true;
   }
 }

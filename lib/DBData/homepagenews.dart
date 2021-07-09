@@ -5,8 +5,11 @@ class HomeNews {
   final String id;
   final String images;
   final String caption;
-final String category;
-  HomeNews(this.title, this.email, this.dates, this.id, this.images, this.caption, this.category);
+  final String category;
+  late final String read;
+
+  HomeNews(this.title, this.email, this.dates, this.id, this.images,
+      this.caption, this.category, this.read);
 
   HomeNews.fromJson(Map<String, dynamic> json)
       : title = json['title'],
@@ -15,15 +18,23 @@ final String category;
         id = json['id'],
         images = json['images'],
         caption = json['captions'],
-       category = json['category'];
+        category = json['category'],
+        read = json['readIt'];
 
   Map<String, dynamic> toJson() => {
-    'name': title,
-    'email': email,
-    'date' : dates,
-    'image' : images,
-    'id' : id,
-    'caption' : caption,
-    'category' : category
-  };
+        'name': title,
+        'email': email,
+        'date': dates,
+        'image': images,
+        'id': id,
+        'caption': caption,
+        'category': category,
+        'read': read
+      };
+  void setState(){
+    if(read == "no"){
+      read = "yes";
+    }
+  }
+
 }

@@ -183,7 +183,7 @@ class _Clubs extends State<Clubs> {
                               setState(() {
                                 link =
                                     'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                        showing.id;
+                                showing.id + "&user=" + showing.email;
                               });
                               print(link);
                               Navigator.push(
@@ -238,7 +238,7 @@ class _Clubs extends State<Clubs> {
                           setState(() {
                             link =
                                 'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                    showing.id;
+                                    showing.id + "&user=" + showing.email;
                           });
                           print(link);
                           Navigator.push(
@@ -315,7 +315,7 @@ class _Clubs extends State<Clubs> {
                               setState(() {
                                 link =
                                     'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                        showing.id;
+                                        showing.id + "&user=" + showing.email;
                               });
                               print(link);
                               Navigator.push(
@@ -370,7 +370,7 @@ class _Clubs extends State<Clubs> {
                           setState(() {
                             link =
                                 'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                    showing.id;
+                                    showing.id + "&user=" + showing.email;
                           });
                           print(link);
                           Navigator.push(
@@ -447,7 +447,7 @@ class _Clubs extends State<Clubs> {
                               setState(() {
                                 link =
                                     'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                        showing.id;
+                                        showing.id + "&user=" + showing.email;
                               });
                               print(link);
                               Navigator.push(
@@ -502,7 +502,7 @@ class _Clubs extends State<Clubs> {
                           setState(() {
                             link =
                                 'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                    showing.id;
+                                    showing.id + "&user=" + showing.email;
                           });
                           print(link);
                           Navigator.push(
@@ -579,7 +579,7 @@ class _Clubs extends State<Clubs> {
                               setState(() {
                                 link =
                                     'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                        showing.id;
+                                        showing.id + "&user=" + showing.email;
                               });
                               print(link);
                               Navigator.push(
@@ -634,7 +634,7 @@ class _Clubs extends State<Clubs> {
                           setState(() {
                             link =
                                 'https://cdsnet.kr/flutterConn/mobile/openNews_mobile.php?id=' +
-                                    showing.id;
+                                    showing.id + "&user=" + showing.email;
                           });
                           print(link);
                           Navigator.push(
